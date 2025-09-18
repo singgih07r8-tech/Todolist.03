@@ -1,0 +1,1217 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MyTodo App - Ultimate Task Manager</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', 'Segoe UI', sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+            color: #333;
+            min-height: 100vh;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background-size: 200% 200%;
+            animation: gradientMove 18s ease-in-out infinite;
+        }
+
+        @keyframes gradientMove {
+            0% {
+                background-position: 0% 50%;
+            }
+
+            50% {
+                background-position: 100% 50%;
+            }
+
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+            overflow: hidden;
+            margin: 20px;
+            animation: fadeIn 0.8s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        header {
+            background: linear-gradient(135deg, #0ea5ea 0%, #3a7bd5 35%, #7c3aed 100%);
+            background-size: 200% 200%;
+            animation: gradientShift 16s ease-in-out infinite;
+            color: white;
+            padding: 48px 32px 48px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        @keyframes gradientShift {
+            0% {
+                background-position: 0% 50%;
+            }
+
+            50% {
+                background-position: 100% 50%;
+            }
+
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        .logo {
+            font-size: 38px;
+            font-weight: 800;
+            margin: 6px auto 8px;
+            background: linear-gradient(90deg, #ffffff 0%, #e9f3ff 40%, #ffd1ff 100%);
+            background-size: 200% 100%;
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: shimmerText 8s linear infinite;
+        }
+
+        @keyframes shimmerText {
+            0% {
+                background-position: 0% 50%;
+            }
+
+            100% {
+                background-position: 200% 50%;
+            }
+        }
+
+        .logo span {
+            background: linear-gradient(90deg, #ffdc5d 0%, #22d3ee 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .subtitle {
+            font-size: 15px;
+            color: rgba(255, 255, 255, 0.92);
+            margin-bottom: 20px;
+        }
+
+        .header-actions {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            display: flex;
+            gap: 12px;
+        }
+
+        .header-btn {
+            background: rgba(255, 255, 255, 0.18);
+            border: 1px solid rgba(255, 255, 255, 0.35);
+            color: white;
+            padding: 9px 16px;
+            border-radius: 999px;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 14px;
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+        }
+
+        .header-btn:hover {
+            background: rgba(255, 255, 255, 0.28);
+            transform: translateY(-2px);
+        }
+
+        .date-time {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 12px;
+            background: linear-gradient(to right, #2575fc, #3a7bd5);
+            color: white;
+            padding: 16px 25px;
+            font-size: 16px;
+            font-weight: 500;
+        }
+
+        .dt-chip {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 14px;
+            background: rgba(255, 255, 255, 0.12);
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            border-radius: 999px;
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+        }
+
+        .time .colon {
+            display: inline-block;
+            width: 8px;
+            text-align: center;
+        }
+
+        .blink {
+            animation: blink 1s steps(2, start) infinite;
+        }
+
+        @keyframes blink {
+            50% {
+                opacity: 0;
+            }
+        }
+
+        .layout {
+            display: grid;
+            grid-template-columns: 260px 1fr;
+            gap: 0;
+        }
+
+        .sidebar {
+            background: rgba(255, 255, 255, 0.98);
+            padding: 24px 18px;
+            min-height: 600px;
+            border-right: 1px solid #e5e7eb;
+        }
+
+        .main {
+            min-width: 0;
+        }
+
+        .nav-group-title {
+            font-weight: 700;
+            color: #64748b;
+            font-size: 11px;
+            letter-spacing: 0.5px;
+            margin: 20px 0 12px;
+            text-transform: uppercase;
+        }
+
+        .nav-group-title:first-child {
+            margin-top: 0;
+        }
+
+        .nav-list {
+            list-style: none;
+            margin-bottom: 0;
+        }
+
+        .nav-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 10px;
+            padding: 12px 16px;
+            border-radius: 8px;
+            color: #64748b;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            margin-bottom: 2px;
+        }
+
+        .nav-item:hover {
+            background: #f1f5f9;
+            color: #334155;
+        }
+
+        .nav-item.active {
+            background: #dbeafe;
+            color: #1d4ed8;
+            font-weight: 500;
+        }
+
+        .nav-left {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .nav-item .count {
+            font-size: 12px;
+            font-weight: 600;
+            color: #6b7280;
+            background: #f3f4f6;
+            padding: 2px 8px;
+            border-radius: 12px;
+            min-width: 20px;
+            text-align: center;
+        }
+
+        .nav-item.active .count {
+            background: #3b82f6;
+            color: white;
+        }
+
+        .tag-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            display: inline-block;
+        }
+
+        .tag-red {
+            background: #ef4444;
+        }
+
+        .tag-green {
+            background: #10b981;
+        }
+
+        .tag-orange {
+            background: #f59e0b;
+        }
+
+        .sidebar-divider {
+            height: 1px;
+            background: #e5e7eb;
+            margin: 20px 0;
+            border: none;
+        }
+
+        .search-bar {
+            padding: 20px;
+            background-color: #f8fafc;
+            display: flex;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        .search-bar input {
+            flex: 1;
+            padding: 16px 20px;
+            border: 1px solid #d1d5db;
+            border-radius: 50px;
+            font-size: 16px;
+            outline: none;
+            transition: all 0.3s ease;
+        }
+
+        .search-bar input:focus {
+            border-color: #3b82f6;
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+        }
+
+        .search-bar button {
+            background: linear-gradient(135deg, #3b82f6, #06b6d4);
+            color: white;
+            border: none;
+            padding: 16px 24px;
+            border-radius: 50px;
+            margin-left: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .search-bar button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(59, 130, 246, 0.3);
+        }
+
+        .content {
+            padding: 25px;
+        }
+
+        .section {
+            background: white;
+            border: 1px solid #e5e7eb;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 20px;
+            transition: all 0.3s ease;
+        }
+
+        .section:hover {
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            border-color: #d1d5db;
+        }
+
+        .section-title {
+            font-size: 18px;
+            color: #1f2937;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            border-bottom: 2px solid #06b6d4;
+            padding-bottom: 8px;
+        }
+
+        .section-title i {
+            color: #06b6d4;
+        }
+
+        .item-list {
+            list-style-type: none;
+        }
+
+        .item-list li {
+            padding: 12px 16px;
+            background: #f8fafc;
+            margin-bottom: 8px;
+            border-radius: 8px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-left: 3px solid #06b6d4;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .item-list li:hover {
+            background: #f1f5f9;
+            transform: translateX(2px);
+        }
+
+        .item-list li span {
+            color: #059669;
+            font-size: 18px;
+        }
+
+        .progress-bar {
+            height: 6px;
+            background: #e5e7eb;
+            border-radius: 3px;
+            margin-top: 12px;
+            overflow: hidden;
+        }
+
+        .progress {
+            height: 100%;
+            background: linear-gradient(90deg, #06b6d4, #3b82f6);
+            border-radius: 3px;
+            transition: width 1s ease;
+        }
+
+        .floating-btn {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 56px;
+            height: 56px;
+            background: linear-gradient(135deg, #3b82f6, #06b6d4);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            box-shadow: 0 8px 20px rgba(59, 130, 246, 0.4);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            z-index: 100;
+        }
+
+        .floating-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 12px 28px rgba(59, 130, 246, 0.5);
+        }
+
+        .server-info {
+            background: #f8fafc;
+            padding: 16px 20px;
+            text-align: center;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            color: #64748b;
+            border-top: 1px solid #e5e7eb;
+        }
+
+        footer {
+            text-align: center;
+            padding: 16px;
+            background: #f1f5f9;
+            color: #6b7280;
+            font-size: 13px;
+        }
+
+        @media (max-width: 1024px) {
+            .layout {
+                grid-template-columns: 1fr;
+            }
+
+            .header-actions {
+                position: relative;
+                top: 0;
+                right: 0;
+                justify-content: center;
+                margin-top: 20px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .date-time {
+                flex-direction: column;
+                gap: 8px;
+                text-align: center;
+            }
+
+            .search-bar {
+                flex-direction: column;
+            }
+
+            .search-bar button {
+                margin-left: 0;
+                margin-top: 12px;
+            }
+        }
+
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: white;
+            padding: 16px 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transform: translateX(150%);
+            transition: transform 0.5s ease;
+            z-index: 1000;
+        }
+
+        .notification.show {
+            transform: translateX(0);
+        }
+
+        .notification i {
+            color: #059669;
+            font-size: 18px;
+        }
+
+        /* Mini Calendar Styles */
+        .mini-calendar {
+            background: #f8fafc;
+            border: 1px solid #e5e7eb;
+            border-radius: 8px;
+            margin: 12px 0;
+            overflow: hidden;
+        }
+
+        .calendar-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px;
+            background: #3b82f6;
+            color: white;
+            font-weight: 600;
+            font-size: 14px;
+        }
+
+        .calendar-header button {
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            color: white;
+            width: 28px;
+            height: 28px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background 0.2s ease;
+        }
+
+        .calendar-header button:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        .calendar-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+        }
+
+        .calendar-day {
+            aspect-ratio: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            border-bottom: 1px solid #f1f5f9;
+            border-right: 1px solid #f1f5f9;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .calendar-day:nth-child(7n) {
+            border-right: none;
+        }
+
+        .calendar-day:hover {
+            background: #e0f2fe;
+        }
+
+        .calendar-day.header {
+            background: #f1f5f9;
+            font-weight: 600;
+            color: #64748b;
+            cursor: default;
+        }
+
+        .calendar-day.header:hover {
+            background: #f1f5f9;
+        }
+
+        .calendar-day.other-month {
+            color: #d1d5db;
+        }
+
+        .calendar-day.today {
+            background: #3b82f6;
+            color: white;
+            font-weight: 600;
+        }
+
+        .calendar-day.selected {
+            background: #06b6d4;
+            color: white;
+        }
+
+        /* Weekly Overview Styles */
+        .weekly-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+            margin-bottom: 24px;
+        }
+
+        .stat-card {
+            background: linear-gradient(135deg, #f8fafc, #f1f5f9);
+            border: 1px solid #e5e7eb;
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .stat-card:nth-child(1) {
+            border-left: 4px solid #10b981;
+        }
+
+        .stat-card:nth-child(2) {
+            border-left: 4px solid #f59e0b;
+        }
+
+        .stat-card:nth-child(3) {
+            border-left: 4px solid #3b82f6;
+        }
+
+        .stat-number {
+            font-size: 32px;
+            font-weight: 800;
+            color: #1f2937;
+            margin-bottom: 4px;
+        }
+
+        .stat-label {
+            font-size: 14px;
+            color: #6b7280;
+            font-weight: 500;
+        }
+
+        .weekly-progress {
+            background: #f8fafc;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 24px;
+        }
+
+        .weekly-progress h3 {
+            font-size: 16px;
+            color: #374151;
+            margin-bottom: 12px;
+        }
+
+        .weekly-progress p {
+            font-size: 14px;
+            color: #6b7280;
+            margin-top: 8px;
+        }
+
+        .daily-breakdown {
+            background: #f8fafc;
+            border-radius: 12px;
+            padding: 20px;
+        }
+
+        .daily-breakdown h3 {
+            font-size: 16px;
+            color: #374151;
+            margin-bottom: 16px;
+        }
+
+        .daily-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 12px;
+        }
+
+        .day-item {
+            text-align: center;
+            background: white;
+            border-radius: 8px;
+            padding: 12px 8px;
+            border: 1px solid #e5e7eb;
+            transition: all 0.2s ease;
+        }
+
+        .day-item:hover {
+            border-color: #3b82f6;
+            box-shadow: 0 2px 8px rgba(59, 130, 246, 0.1);
+        }
+
+        .day-name {
+            font-size: 12px;
+            font-weight: 600;
+            color: #6b7280;
+            margin-bottom: 8px;
+        }
+
+        .day-tasks {
+            font-size: 16px;
+            font-weight: 700;
+            color: #1f2937;
+            margin-bottom: 8px;
+        }
+
+        .day-bar {
+            height: 4px;
+            background: #e5e7eb;
+            border-radius: 2px;
+            overflow: hidden;
+        }
+
+        .day-progress {
+            height: 100%;
+            background: linear-gradient(90deg, #10b981, #06b6d4);
+            transition: width 0.3s ease;
+        }
+
+        @media (max-width: 768px) {
+            .weekly-stats {
+                grid-template-columns: 1fr;
+            }
+
+            .daily-grid {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 8px;
+            }
+
+            .day-item {
+                padding: 8px 4px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <div class="logo">MyTodo <span>Cc</span></div>
+            <div class="subtitle">Ultimate Task Management Solution</div>
+            <div class="header-actions">
+                <button class="header-btn" onclick="openCreateRoomModal()">
+                    <i class="fas fa-plus"></i> Buat Room
+                </button>
+                <button class="header-btn" onclick="openJoinRoomModal()">
+                    <i class="fas fa-sign-in-alt"></i> Join Room
+                </button>
+            </div>
+        </header>
+
+        <div class="date-time">
+            <div id="time" class="dt-chip time">
+                <i class="fas fa-clock"></i>
+                <span id="timeDisplay">10:18:07</span>
+            </div>
+            <div id="date" class="dt-chip date">
+                <i class="fas fa-calendar-alt"></i>
+                <span>Rabu, 17 Sep 2025</span>
+            </div>
+            <button class="header-btn" onclick="logout()" style="margin-left: auto;">
+                <i class="fas fa-sign-out-alt"></i> Logout
+            </button>
+        </div>
+
+        <div class="layout">
+            <aside class="sidebar">
+                <div class="nav-group">
+                    <div class="nav-group-title">HOME</div>
+                    <ul class="nav-list">
+                        <li class="nav-item active">
+                            <span class="nav-left">
+                                <i class="fas fa-home"></i> Dashboard
+                            </span>
+                        </li>
+                    </ul>
+                </div>
+
+                <hr class="sidebar-divider">
+
+                <div class="nav-group">
+                    <div class="nav-group-title">MY LISTS</div>
+                    <ul class="nav-list">
+                        <li class="nav-item">
+                            <span class="nav-left">
+                                <i class="fas fa-list"></i> All Tasks
+                            </span>
+                            <span class="count">14</span>
+                        </li>
+                        <li class="nav-item">
+                            <span class="nav-left">
+                                <i class="fas fa-users"></i> Sales Team
+                            </span>
+                            <span class="count">9</span>
+                        </li>
+                        <li class="nav-item">
+                            <span class="nav-left">
+                                <i class="fas fa-bullhorn"></i> Marketing
+                            </span>
+                            <span class="count">6</span>
+                        </li>
+                        <li class="nav-item">
+                            <span class="nav-left">
+                                <i class="fas fa-chart-line"></i> Analytics
+                            </span>
+                            <span class="count">9</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <hr class="sidebar-divider">
+
+                <div class="nav-group">
+                    <div class="nav-group-title">CALENDAR</div>
+                    <ul class="nav-list">
+                        <li class="nav-item" onclick="toggleWeekView()">
+                            <span class="nav-left">
+                                <i class="fas fa-calendar-week"></i> This Week
+                            </span>
+                        </li>
+                        <li class="nav-item" onclick="toggleCalendar()">
+                            <span class="nav-left">
+                                <i class="fas fa-calendar"></i> This Month
+                            </span>
+                        </li>
+
+                        <!-- Mini Calendar -->
+                        <div id="miniCalendar" class="mini-calendar" style="display: none;">
+                            <div class="calendar-header">
+                                <button onclick="prevMonth()">&lt;</button>
+                                <span id="monthYear">September 2025</span>
+                                <button onclick="nextMonth()">&gt;</button>
+                            </div>
+                            <div class="calendar-grid" id="calendarGrid">
+                                <!-- Calendar will be generated by JavaScript -->
+                            </div>
+                        </div>
+                    </ul>
+                </div>
+
+                <hr class="sidebar-divider">
+
+                <div class="nav-group">
+                    <div class="nav-group-title">Tags</div>
+                    <ul class="nav-list">
+                        <li class="nav-item">
+                            <span class="nav-left">
+                                <span class="tag-dot tag-red"></span> Important
+                            </span>
+                        </li>
+                        <li class="nav-item">
+                            <span class="nav-left">
+                                <span class="tag-dot tag-green"></span> Home Renovation
+                            </span>
+                        </li>
+                        <li class="nav-item">
+                            <span class="nav-left">
+                                <span class="tag-dot tag-orange"></span> Critical
+                            </span>
+                        </li>
+                    </ul>
+                </div>
+            </aside>
+
+            <main class="main">
+                <div class="search-bar">
+                    <input type="text" placeholder="Cari tugas atau proyek..." id="searchInput">
+                    <button onclick="searchItems()">
+                        <i class="fas fa-search"></i> Cari
+                    </button>
+                </div>
+
+                <div class="content">
+                    <!-- Weekly Overview Section (Hidden by default) -->
+                    <div class="section" id="weeklyOverview" style="display: none;">
+                        <h2 class="section-title">
+                            <i class="fas fa-calendar-week"></i> Ringkasan Minggu Ini
+                        </h2>
+                        <div class="weekly-stats">
+                            <div class="stat-card">
+                                <div class="stat-number" id="weeklyCompleted">5</div>
+                                <div class="stat-label">Selesai</div>
+                            </div>
+                            <div class="stat-card">
+                                <div class="stat-number" id="weeklyInProgress">3</div>
+                                <div class="stat-label">Progress</div>
+                            </div>
+                            <div class="stat-card">
+                                <div class="stat-number" id="weeklyTotal">8</div>
+                                <div class="stat-label">Total</div>
+                            </div>
+                        </div>
+                        <div class="weekly-progress">
+                            <h3>Progress Minggu Ini</h3>
+                            <div class="progress-bar">
+                                <div class="progress" style="width: 62%"></div>
+                            </div>
+                            <p>5 dari 8 tugas telah diselesaikan (62%)</p>
+                        </div>
+                        <div class="daily-breakdown">
+                            <h3>Breakdown Harian</h3>
+                            <div class="daily-grid">
+                                <div class="day-item">
+                                    <div class="day-name">Sen</div>
+                                    <div class="day-tasks">2/2</div>
+                                    <div class="day-bar">
+                                        <div class="day-progress" style="width: 100%"></div>
+                                    </div>
+                                </div>
+                                <div class="day-item">
+                                    <div class="day-name">Sel</div>
+                                    <div class="day-tasks">2/3</div>
+                                    <div class="day-bar">
+                                        <div class="day-progress" style="width: 67%"></div>
+                                    </div>
+                                </div>
+                                <div class="day-item">
+                                    <div class="day-name">Rab</div>
+                                    <div class="day-tasks">1/1</div>
+                                    <div class="day-bar">
+                                        <div class="day-progress" style="width: 100%"></div>
+                                    </div>
+                                </div>
+                                <div class="day-item">
+                                    <div class="day-name">Kam</div>
+                                    <div class="day-tasks">0/1</div>
+                                    <div class="day-bar">
+                                        <div class="day-progress" style="width: 0%"></div>
+                                    </div>
+                                </div>
+                                <div class="day-item">
+                                    <div class="day-name">Jum</div>
+                                    <div class="day-tasks">0/1</div>
+                                    <div class="day-bar">
+                                        <div class="day-progress" style="width: 0%"></div>
+                                    </div>
+                                </div>
+                                <div class="day-item">
+                                    <div class="day-name">Sab</div>
+                                    <div class="day-tasks">0/0</div>
+                                    <div class="day-bar">
+                                        <div class="day-progress" style="width: 0%"></div>
+                                    </div>
+                                </div>
+                                <div class="day-item">
+                                    <div class="day-name">Min</div>
+                                    <div class="day-tasks">0/0</div>
+                                    <div class="day-bar">
+                                        <div class="day-progress" style="width: 0%"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="section">
+                        <h2 class="section-title">
+                            <i class="fas fa-rocket"></i> Project Aktif
+                        </h2>
+                        <ul class="item-list">
+                            <li>
+                                Seaf Dating
+                                <span><i class="fas fa-check-circle"></i></span>
+                            </li>
+                            <li>
+                                Tujuan Utama
+                                <span><i class="fas fa-check-circle"></i></span>
+                            </li>
+                            <li>
+                                Teknik Merancang
+                                <span><i class="fas fa-check-circle"></i></span>
+                            </li>
+                        </ul>
+                        <div class="progress-bar">
+                            <div class="progress" style="width: 75%"></div>
+                        </div>
+                        <div style="display:flex; justify-content:flex-end; margin-top:12px;">
+                            <button class="header-btn" style="background: #ef4444;">
+                                <i class="fas fa-trash"></i> Hapus Selesai
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="section">
+                        <h2 class="section-title">
+                            <i class="fas fa-cogs"></i> Tugas dalam Progress
+                        </h2>
+                        <ul class="item-list">
+                            <li>
+                                Teknik Mengembangkan
+                                <span style="color: #f59e0b;">
+                                    <i class="fas fa-spinner fa-spin"></i>
+                                </span>
+                            </li>
+                            <li>
+                                Secang Pe
+                                <span style="color: #f59e0b;">
+                                    <i class="fas fa-spinner fa-spin"></i>
+                                </span>
+                            </li>
+                            <li>
+                                Teknik Dasar
+                                <span style="color: #f59e0b;">
+                                    <i class="fas fa-spinner fa-spin"></i>
+                                </span>
+                            </li>
+                        </ul>
+                        <div class="progress-bar">
+                            <div class="progress" style="width: 45%"></div>
+                        </div>
+                        <div style="display:flex; justify-content:flex-end; margin-top:12px;">
+                            <button class="header-btn" style="background: #ef4444;">
+                                <i class="fas fa-trash"></i> Hapus Selesai
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+
+        <div class="server-info">
+            <i class="fas fa-server"></i> Server: 127.0.0.1:5500 | Status:
+            <span style="color: #059669; font-weight: bold;">Online</span>
+        </div>
+
+        <footer>
+            <p>&copy; 2025 MyTodo Cc - All rights reserved | Version 2.0</p>
+        </footer>
+    </div>
+
+    <div class="floating-btn" onclick="openAddTaskModal()">
+        <i class="fas fa-plus"></i>
+    </div>
+
+    <div class="notification" id="notification">
+        <i class="fas fa-check-circle"></i>
+        <div>Selamat! Aplikasi MyTodo siap digunakan.</div>
+    </div>
+
+    <script>
+        // Global variables for calendar
+        let currentMonth = 8; // September (0-indexed)
+        let currentYear = 2025;
+        const monthNames = [
+            'Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni',
+            'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'
+        ];
+        const dayNames = ['Min', 'Sen', 'Sel', 'Rab', 'Kam', 'Jum', 'Sab'];
+
+        // Basic functionality
+        function openCreateRoomModal() {
+            alert('Create Room Modal');
+        }
+
+        function openJoinRoomModal() {
+            alert('Join Room Modal');
+        }
+
+        function logout() {
+            alert('Logout');
+        }
+
+        function searchItems() {
+            const query = document.getElementById('searchInput').value;
+            alert('Search: ' + query);
+        }
+
+        function openAddTaskModal() {
+            alert('Add Task Modal');
+        }
+
+        // Calendar functions
+        function toggleCalendar() {
+            const calendar = document.getElementById('miniCalendar');
+            if (calendar.style.display === 'none') {
+                calendar.style.display = 'block';
+                generateCalendar();
+            } else {
+                calendar.style.display = 'none';
+            }
+        }
+
+        function toggleWeekView() {
+            const weeklyOverview = document.getElementById('weeklyOverview');
+            if (weeklyOverview.style.display === 'none') {
+                weeklyOverview.style.display = 'block';
+                // Scroll to the weekly overview
+                weeklyOverview.scrollIntoView({ behavior: 'smooth' });
+            } else {
+                weeklyOverview.style.display = 'none';
+            }
+        }
+
+        function generateCalendar() {
+            const monthYear = document.getElementById('monthYear');
+            const calendarGrid = document.getElementById('calendarGrid');
+
+            monthYear.textContent = `${monthNames[currentMonth]} ${currentYear}`;
+
+            // Clear previous calendar
+            calendarGrid.innerHTML = '';
+
+            // Add day headers
+            dayNames.forEach(day => {
+                const dayHeader = document.createElement('div');
+                dayHeader.className = 'calendar-day header';
+                dayHeader.textContent = day;
+                calendarGrid.appendChild(dayHeader);
+            });
+
+            // Get first day of month and days in month
+            const firstDay = new Date(currentYear, currentMonth, 1).getDay();
+            const daysInMonth = new Date(currentYear, currentMonth + 1, 0).getDate();
+            const daysInPrevMonth = new Date(currentYear, currentMonth, 0).getDate();
+
+            // Add previous month's trailing days
+            for (let i = firstDay - 1; i >= 0; i--) {
+                const dayElement = document.createElement('div');
+                dayElement.className = 'calendar-day other-month';
+                dayElement.textContent = daysInPrevMonth - i;
+                calendarGrid.appendChild(dayElement);
+            }
+
+            // Add current month days
+            const today = new Date();
+            const isCurrentMonth = today.getFullYear() === currentYear && today.getMonth() === currentMonth;
+
+            for (let day = 1; day <= daysInMonth; day++) {
+                const dayElement = document.createElement('div');
+                dayElement.className = 'calendar-day';
+                dayElement.textContent = day;
+
+                if (isCurrentMonth && day === today.getDate()) {
+                    dayElement.classList.add('today');
+                }
+
+                dayElement.addEventListener('click', () => {
+                    // Remove previous selection
+                    document.querySelectorAll('.calendar-day.selected').forEach(el => {
+                        el.classList.remove('selected');
+                    });
+                    // Add selection to clicked day
+                    dayElement.classList.add('selected');
+                });
+
+                calendarGrid.appendChild(dayElement);
+            }
+
+            // Add next month's leading days to fill the grid
+            const totalCells = calendarGrid.children.length;
+            const remainingCells = 42 - totalCells; // 6 rows × 7 days = 42 cells
+
+            for (let day = 1; day <= remainingCells && remainingCells > 0; day++) {
+                const dayElement = document.createElement('div');
+                dayElement.className = 'calendar-day other-month';
+                dayElement.textContent = day;
+                calendarGrid.appendChild(dayElement);
+            }
+        }
+
+        function prevMonth() {
+            currentMonth--;
+            if (currentMonth < 0) {
+                currentMonth = 11;
+                currentYear--;
+            }
+            generateCalendar();
+        }
+
+        function nextMonth() {
+            currentMonth++;
+            if (currentMonth > 11) {
+                currentMonth = 0;
+                currentYear++;
+            }
+            generateCalendar();
+        }
+
+        // Update time
+        function updateTime() {
+            const now = new Date();
+            const timeString = now.toLocaleTimeString('id-ID');
+            const timeDisplay = document.getElementById('timeDisplay');
+            if (timeDisplay) {
+                timeDisplay.textContent = timeString;
+            }
+        }
+
+        // Update time every second
+        setInterval(updateTime, 1000);
+        updateTime();
+
+        // Show notification on load
+        setTimeout(() => {
+            const notification = document.getElementById('notification');
+            if (notification) {
+                notification.classList.add('show');
+                setTimeout(() => {
+                    notification.classList.remove('show');
+                }, 3000);
+            }
+        }, 1000);
+
+        // Initialize calendar when page loads
+        document.addEventListener('DOMContentLoaded', function () {
+            generateCalendar();
+        });
+    </script>
+</body>
+
+</html>
