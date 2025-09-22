@@ -386,7 +386,6 @@
             border-left: 3px solid #06b6d4;
             transition: all 0.3s ease;
             cursor: pointer;
-            position: relative;
         }
 
         .item-list li:hover {
@@ -394,64 +393,9 @@
             transform: translateX(2px);
         }
 
-        .item-list li:hover .complete-btn {
-            opacity: 1;
-            transform: translateX(0);
-        }
-
         .item-list li span {
             color: #059669;
             font-size: 18px;
-        }
-
-        /* Tombol Selesai - styling utama */
-        .complete-btn {
-            background: #10b981;
-            color: white;
-            border: none;
-            padding: 6px 12px;
-            border-radius: 6px;
-            cursor: pointer;
-            font-size: 12px;
-            font-weight: 500;
-            transition: all 0.3s ease;
-            opacity: 0;
-            transform: translateX(10px);
-            display: flex;
-            align-items: center;
-            gap: 4px;
-            margin-left: 10px;
-        }
-
-        .complete-btn:hover {
-            background: #059669;
-            transform: translateY(-1px);
-            box-shadow: 0 2px 8px rgba(16, 185, 129, 0.3);
-        }
-
-        .complete-btn:disabled {
-            background: #9ca3af;
-            cursor: not-allowed;
-            opacity: 1;
-            transform: none;
-            box-shadow: none;
-        }
-
-        .complete-btn.completed {
-            background: #9ca3af;
-            cursor: not-allowed;
-        }
-
-        /* Styling untuk task yang sudah selesai */
-        .item-list li.completed {
-            opacity: 0.7;
-            text-decoration: line-through;
-            border-left-color: #10b981;
-            background: #f0fdf4;
-        }
-
-        .item-list li.completed span {
-            color: #10b981;
         }
 
         .progress-bar {
@@ -575,939 +519,6 @@
             margin: 12px 0;
             overflow: hidden;
         }
-        
-        .task-actions {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        /* Modal Styles */
-        .modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.5);
-            z-index: 1000;
-            align-items: center;
-            justify-content: center;
-            animation: fadeIn 0.3s ease;
-        }
-
-        .modal-content {
-            background: white;
-            width: 90%;
-            max-width: 500px;
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-            overflow: hidden;
-            animation: slideUp 0.4s ease;
-        }
-
-        @keyframes slideUp {
-            from {
-                transform: translateY(50px);
-                opacity: 0;
-            }
-
-            to {
-                transform: translateY(0);
-                opacity: 1;
-            }
-        }
-
-        .modal-header {
-            background: linear-gradient(135deg, #3b82f6, #06b6d4);
-            color: white;
-            padding: 20px;
-            text-align: center;
-            position: relative;
-        }
-
-        .modal-header h2 {
-            font-size: 24px;
-            margin: 0;
-        }
-
-        .modal-body {
-            padding: 25px;
-        }
-
-        .form-group {
-            margin-bottom: 20px;
-        }
-
-        .form-group label {
-            display: block;
-            margin-bottom: 8px;
-            font-weight: 600;
-            color: #3b82f6;
-        }
-
-        .form-group input,
-        .form-group select,
-        .form-group textarea {
-            width: 100%;
-            padding: 12px 15px;
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            font-size: 16px;
-            outline: none;
-            transition: all 0.3s ease;
-        }
-
-        .form-group input:focus,
-        .form-group select:focus,
-        .form-group textarea:focus {
-            border-color: #3b82f6;
-            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
-        }
-
-        .modal-footer {
-            padding: 15px 25px;
-            background: #f9f9f9;
-            display: flex;
-            justify-content: flex-end;
-            gap: 15px;
-        }
-
-        .btn {
-            padding: 12px 25px;
-            border: none;
-            border-radius: 8px;
-            font-size: 16px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .btn-primary {
-            background: linear-gradient(135deg, #3b82f6, #06b6d4);
-            color: white;
-        }
-
-        .btn-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-        }
-
-        .btn-secondary {
-            background: #f0f0f0;
-            color: #555;
-        }
-
-        .btn-secondary:hover {
-            background: #e0e0e0;
-        }
-
-        .room-code-display {
-            display: none;
-            background: #f0f9ff;
-            padding: 20px;
-            border-radius: 10px;
-            margin-top: 20px;
-            text-align: center;
-        }
-
-        .room-code-display.show {
-            display: block;
-        }
-
-        .room-code {
-            font-family: 'Courier New', monospace;
-            font-size: 24px;
-            font-weight: bold;
-            color: #3b82f6;
-            margin: 10px 0;
-            padding: 10px;
-            background: white;
-            border: 2px dashed #3b82f6;
-            border-radius: 8px;
-        }
-
-        .copy-btn {
-            background: #10b981;
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 8px;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            margin: 10px auto 0;
-            transition: all 0.3s ease;
-        }
-
-        .copy-btn:hover {
-            background: #059669;
-            transform: translateY(-1px);
-        }
-
-        /* Room info indicator in header */
-        .room-info {
-            display: none;
-            position: absolute;
-            top: 20px;
-            left: 20px;
-            background: rgba(16, 185, 129, 0.2);
-            border: 1px solid rgba(16, 185, 129, 0.4);
-            color: white;
-            padding: 8px 16px;
-            border-radius: 999px;
-            font-size: 14px;
-            backdrop-filter: blur(8px);
-        }
-
-        .room-info.show {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-    </style>
-    </head>
-    
-    <body>
-        <div class="container">
-            <header>
-                <div class="room-info" id="roomInfo">
-                    <i class="fas fa-users"></i>
-                    <span id="roomName">Room Name</span>
-                    <span id="userCount">(2 Users)</span>
-                </div>
-                <div class="logo">MyTodo <span>Cc</span></div>
-                <div class="subtitle">Ultimate Task Management Solution</div>
-                <div class="header-actions">
-                    <button class="header-btn" onclick="openCreateRoomModal()">
-                        <i class="fas fa-plus"></i> Buat Room
-                    </button>
-                    <button class="header-btn" onclick="openJoinRoomModal()">
-                        <i class="fas fa-sign-in-alt"></i> Join Room
-                    </button>
-                </div>
-            </header>
-    
-            <div class="date-time">
-                <div id="time" class="dt-chip time">
-                    <i class="fas fa-clock"></i>
-                    <span id="timeDisplay">10:18:07</span>
-                </div>
-                <div id="date" class="dt-chip date">
-                    <i class="fas fa-calendar-alt"></i>
-                    <span>Rabu, 17 Sep 2025</span>
-                </div>
-                <button class="header-btn" onclick="logout()" style="margin-left: auto;">
-                    <i class="fas fa-sign-out-alt"></i> Logout
-                </button>
-            </div>
-    
-            <div class="layout">
-                <aside class="sidebar">
-                    <div class="nav-group">
-                        <div class="nav-group-title">HOME</div>
-                        <ul class="nav-list">
-                            <li class="nav-item active">
-                                <span class="nav-left">
-                                    <i class="fas fa-home"></i> Dashboard
-                                </span>
-                            </li>
-                        </ul>
-                    </div>
-    
-                    <hr class="sidebar-divider">
-    
-                    <div class="nav-group">
-                        <div class="nav-group-title">MY LISTS</div>
-                        <ul class="nav-list">
-                            <li class="nav-item">
-                                <span class="nav-left">
-                                    <i class="fas fa-list"></i> All Tasks
-                                </span>
-                                <span class="count" id="allTasksCount">14</span>
-                            </li>
-                            <li class="nav-item">
-                                <span class="nav-left">
-                                    <i class="fas fa-users"></i> Sales Team
-                                </span>
-                                <span class="count">9</span>
-                            </li>
-                            <li class="nav-item">
-                                <span class="nav-left">
-                                    <i class="fas fa-bullhorn"></i> Marketing
-                                </span>
-                                <span class="count">6</span>
-                            </li>
-                            <li class="nav-item">
-                                <span class="nav-left">
-                                    <i class="fas fa-chart-line"></i> Analytics
-                                </span>
-                                <span class="count">9</span>
-                            </li>
-                        </ul>
-                    </div>
-    
-                    <hr class="sidebar-divider">
-    
-                    <div class="nav-group">
-                        <div class="nav-group-title">CALENDAR</div>
-                        <ul class="nav-list">
-                            <li class="nav-item">
-                                <span class="nav-left">
-                                    <i class="fas fa-calendar-week"></i> This Week
-                                </span>
-                            </li>
-                            <li class="nav-item">
-                                <span class="nav-left">
-                                    <i class="fas fa-calendar"></i> This Month
-                                </span>
-                            </li>
-                        </ul>
-                    </div>
-    
-                    <hr class="sidebar-divider">
-    
-                    <div class="nav-group">
-                        <div class="nav-group-title">Tags</div>
-                        <ul class="nav-list">
-                            <li class="nav-item">
-                                <span class="nav-left">
-                                    <span class="tag-dot tag-red"></span> Important
-                                </span>
-                            </li>
-                            <li class="nav-item">
-                                <span class="nav-left">
-                                    <span class="tag-dot tag-green"></span> Home Renovation
-                                </span>
-                            </li>
-                            <li class="nav-item">
-                                <span class="nav-left">
-                                    <span class="tag-dot tag-orange"></span> Critical
-                                </span>
-                            </li>
-                        </ul>
-                    </div>
-                </aside>
-    
-                <main class="main">
-                    <div class="search-bar">
-                        <input type="text" placeholder="Cari tugas atau proyek..." id="searchInput">
-                        <button onclick="searchItems()">
-                            <i class="fas fa-search"></i> Cari
-                        </button>
-                    </div>
-    
-                    <div class="content">
-                        <div class="section">
-                            <h2 class="section-title">
-                                <i class="fas fa-rocket"></i> Project Aktif
-                            </h2>
-                            <ul class="item-list" id="activeProjectsList">
-                                <li>
-                                    <div>Seaf Dating</div>
-                                    <div class="task-actions">
-                                        <span><i class="fas fa-check-circle"></i></span>
-                                        <button class="complete-btn completed" disabled>
-                                            <i class="fas fa-check"></i> Selesai
-                                        </button>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div>Tujuan Utama</div>
-                                    <div class="task-actions">
-                                        <span><i class="fas fa-check-circle"></i></span>
-                                        <button class="complete-btn completed" disabled>
-                                            <i class="fas fa-check"></i> Selesai
-                                        </button>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div>Teknik Merancang</div>
-                                    <div class="task-actions">
-                                        <span><i class="fas fa-check-circle"></i></span>
-                                        <button class="complete-btn completed" disabled>
-                                            <i class="fas fa-check"></i> Selesai
-                                        </button>
-                                    </div>
-                                </li>
-                            </ul>
-                            <div class="progress-bar">
-                                <div class="progress" style="width: 75%"></div>
-                            </div>
-                            <div style="display:flex; justify-content:flex-end; margin-top:12px;">
-                                <button class="header-btn" style="background: #ef4444;"
-                                    onclick="clearCompleted('activeProjectsList')">
-                                    <i class="fas fa-trash"></i> Hapus Selesai
-                                </button>
-                            </div>
-                        </div>
-    
-                        <div class="section">
-                            <h2 class="section-title">
-                                <i class="fas fa-cogs"></i> Tugas dalam Progress
-                            </h2>
-                            <ul class="item-list" id="progressTasksList">
-                                <li>
-                                    <div>Teknik Mengembangkan</div>
-                                    <div class="task-actions">
-                                        <span style="color: #f59e0b;">
-                                            <i class="fas fa-spinner fa-spin"></i>
-                                        </span>
-                                        <button class="complete-btn" onclick="completeTask(this)">
-                                            <i class="fas fa-check"></i> Selesai
-                                        </button>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div>Implementasi Database</div>
-                                    <div class="task-actions">
-                                        <span style="color: #f59e0b;">
-                                            <i class="fas fa-spinner fa-spin"></i>
-                                        </span>
-                                        <button class="complete-btn" onclick="completeTask(this)">
-                                            <i class="fas fa-check"></i> Selesai
-                                        </button>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div>Testing & QA</div>
-                                    <div class="task-actions">
-                                        <span style="color: #f59e0b;">
-                                            <i class="fas fa-spinner fa-spin"></i>
-                                        </span>
-                                        <button class="complete-btn" onclick="completeTask(this)">
-                                            <i class="fas fa-check"></i> Selesai
-                                        </button>
-                                    </div>
-                                </li>
-                            </ul>
-                            <div class="progress-bar">
-                                <div class="progress" id="progressTasksProgress" style="width: 45%"></div>
-                            </div>
-                            <div style="display:flex; justify-content:flex-end; margin-top:12px;">
-                                <button class="header-btn" style="background: #ef4444;"
-                                    onclick="clearCompleted('progressTasksList')">
-                                    <i class="fas fa-trash"></i> Hapus Selesai
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </main>
-            </div>
-    
-            <div class="server-info">
-                <i class="fas fa-server"></i> Server: 127.0.0.1:5500 | Status:
-                <span style="color: #059669; font-weight: bold;">Online</span>
-            </div>
-    
-            <footer>
-                <p>&copy; 2025 MyTodo Cc - All rights reserved | Version 2.0</p>
-            </footer>
-        </div>
-    
-        <div class="floating-btn" onclick="openAddTaskModal()">
-            <i class="fas fa-plus"></i>
-        </div>
-    
-        <div class="notification" id="notification">
-            <i class="fas fa-check-circle"></i>
-            <div>Selamat! Aplikasi MyTodo siap digunakan.</div>
-        </div>
-    
-        <!-- Modal Buat Room -->
-        <div id="createRoomModal" class="modal">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h2><i class="fas fa-plus-circle"></i> Buat Room Baru</h2>
-                </div>
-                <div class="modal-body">
-                    <div class="form-group">
-                        <label for="roomNameInput">
-                            <i class="fas fa-home"></i> Nama Room
-                        </label>
-                        <input type="text" id="roomNameInput" placeholder="Masukkan nama room..." maxlength="50">
-                    </div>
-                    <div class="form-group">
-                        <label for="roomPassword">
-                            <i class="fas fa-lock"></i> Password (Opsional)
-                        </label>
-                        <input type="password" id="roomPassword"
-                            placeholder="Masukkan password room (kosongkan jika tidak perlu)">
-                    </div>
-                    <div class="form-group">
-                        <label for="roomDescription">
-                            <i class="fas fa-info-circle"></i> Deskripsi Room
-                        </label>
-                        <textarea id="roomDescription" rows="3"
-                            placeholder="Deskripsi singkat tentang room ini..."></textarea>
-                    </div>
-    
-                    <!-- Display kode room setelah dibuat -->
-                    <div id="createdRoomCode" class="room-code-display">
-                        <h3><i class="fas fa-key"></i> Room Berhasil Dibuat!</h3>
-                        <p>Bagikan kode ini kepada orang lain untuk bergabung:</p>
-                        <div class="room-code" id="roomCodeDisplay">ABCD-1234</div>
-                        <button class="copy-btn" onclick="copyRoomCode()">
-                            <i class="fas fa-copy"></i> Salin Kode
-                        </button>
-                        <p style="margin-top: 15px; font-size: 14px; color: #666;">
-                            Kode room ini akan otomatis tersimpan. Anda dapat menutup modal ini sekarang.
-                        </p>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" onclick="closeCreateRoomModal()">
-                        <i class="fas fa-times"></i> Batal
-                    </button>
-                    <button type="button" class="btn btn-primary" onclick="createNewRoom()">
-                        <i class="fas fa-plus"></i> Buat Room
-                    </button>
-                </div>
-            </div>
-        </div>
-    
-        <!-- Modal Join Room -->
-        <div id="joinRoomModal" class="modal">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h2><i class="fas fa-sign-in-alt"></i> Gabung ke Room</h2>
-                </div>
-                <div class="modal-body">
-                    <div class="form-group">
-                        <label for="joinRoomCode">
-                            <i class="fas fa-key"></i> Kode Room
-                        </label>
-                        <input type="text" id="joinRoomCode" placeholder="Masukkan kode room (contoh: ABCD-1234)"
-                            style="text-transform: uppercase;" maxlength="9">
-                    </div>
-                    <div class="form-group">
-                        <label for="joinRoomPassword">
-                            <i class="fas fa-lock"></i> Password (Jika diperlukan)
-                        </label>
-                        <input type="password" id="joinRoomPassword" placeholder="Masukkan password room">
-                    </div>
-                    <div class="form-group">
-                        <label for="userNickname">
-                            <i class="fas fa-user"></i> Nama Panggilan
-                        </label>
-                        <input type="text" id="userNickname" placeholder="Nama Anda di room ini..." maxlength="25">
-                    </div>
-    
-                    <!-- Info room setelah berhasil join -->
-                    <div id="joinedRoomInfo" class="room-code-display">
-                        <h3><i class="fas fa-check-circle"></i> Berhasil Bergabung!</h3>
-                        <p>Sekarang Anda sudah bergabung ke room:</p>
-                        <div style="background: #f0f9ff; padding: 15px; border-radius: 8px; margin: 15px 0;">
-                            <h4 id="joinedRoomName" style="color: #3b82f6; margin: 0 0 10px 0;">Nama Room</h4>
-                            <div style="display: flex; align-items: center; gap: 10px;">
-                                <i class="fas fa-users" style="color: #10b981;"></i>
-                                <span id="joinedUserCount">2 pengguna online</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" onclick="closeJoinRoomModal()">
-                        <i class="fas fa-times"></i> Batal
-                    </button>
-                    <button type="button" class="btn btn-primary" onclick="joinRoom()">
-                        <i class="fas fa-sign-in-alt"></i> Gabung
-                    </button>
-                </div>
-            </div>
-        </div>
-    
-        <script>
-            // State management untuk room
-            let currentRoom = null;
-            let roomUsers = [];
-
-            // Task completion functionality
-            function completeTask(button) {
-                const listItem = button.closest('li');
-                const taskName = listItem.querySelector('div').textContent;
-                const statusSpan = listItem.querySelector('.task-actions span');
-
-                // Update visual status
-                listItem.classList.add('completed');
-                statusSpan.innerHTML = '<i class="fas fa-check-circle" style="color: #10b981;"></i>';
-
-                // Update button
-                button.innerHTML = '<i class="fas fa-check"></i> Selesai';
-                button.classList.add('completed');
-                button.disabled = true;
-                button.onclick = null;
-
-                // Update progress bar
-                updateProgressBar();
-
-                // Show notification
-                showNotification(`✅ Tugas "${taskName}" telah diselesaikan!`);
-
-                // Update counters
-                updateTaskCounters();
-
-                // Confetti effect
-                createConfetti();
-            }
-
-            function clearCompleted(listId) {
-                const list = document.getElementById(listId);
-                const completedTasks = list.querySelectorAll('li.completed');
-                let deletedCount = 0;
-
-                completedTasks.forEach(task => {
-                    task.style.animation = 'slideOut 0.3s ease';
-                    setTimeout(() => {
-                        task.remove();
-                        deletedCount++;
-                        if (deletedCount === completedTasks.length) {
-                            updateProgressBar();
-                            updateTaskCounters();
-                            showNotification(`🗑️ ${deletedCount} tugas yang sudah selesai telah dihapus!`);
-                        }
-                    }, 300);
-                });
-            }
-
-            function updateProgressBar() {
-                // Update progress tasks bar
-                const progressList = document.getElementById('progressTasksList');
-                const progressTasks = progressList.querySelectorAll('li');
-                const completedProgressTasks = progressList.querySelectorAll('li.completed');
-
-                if (progressTasks.length > 0) {
-                    const progressPercentage = (completedProgressTasks.length / progressTasks.length) * 100;
-                    document.getElementById('progressTasksProgress').style.width = progressPercentage + '%';
-                }
-            }
-
-            function updateTaskCounters() {
-                const allTasks = document.querySelectorAll('.item-list li').length;
-                document.getElementById('allTasksCount').textContent = allTasks;
-            }
-
-            function createConfetti() {
-                for (let i = 0; i < 10; i++) {
-                    const confetti = document.createElement('div');
-                    confetti.style.position = 'fixed';
-                    confetti.style.left = Math.random() * 100 + 'vw';
-                    confetti.style.top = '-10px';
-                    confetti.style.fontSize = '20px';
-                    confetti.style.zIndex = '9999';
-                    confetti.innerHTML = ['🎉', '✨', '🎊', '⭐'][Math.floor(Math.random() * 4)];
-                    confetti.style.animation = 'fall 3s linear forwards';
-                    document.body.appendChild(confetti);
-
-                    setTimeout(() => confetti.remove(), 3000);
-                }
-            }
-
-            // Room functions
-            function openCreateRoomModal() {
-                document.getElementById('createRoomModal').style.display = 'flex';
-                // Reset form
-                document.getElementById('roomNameInput').value = '';
-                document.getElementById('roomPassword').value = '';
-                document.getElementById('roomDescription').value = '';
-                document.getElementById('createdRoomCode').classList.remove('show');
-            }
-
-            function closeCreateRoomModal() {
-                document.getElementById('createRoomModal').style.display = 'none';
-            }
-
-            function createNewRoom() {
-                const roomName = document.getElementById('roomNameInput').value.trim();
-                const password = document.getElementById('roomPassword').value;
-                const description = document.getElementById('roomDescription').value.trim();
-
-                if (!roomName) {
-                    showNotification('❌ Nama room tidak boleh kosong!');
-                    return;
-                }
-
-                // Generate room code
-                const roomCode = generateRoomCode();
-
-                // Simulasi pembuatan room (dalam aplikasi nyata akan terhubung ke backend)
-                currentRoom = {
-                    id: roomCode,
-                    name: roomName,
-                    password: password,
-                    description: description,
-                    users: ['Anda'],
-                    createdAt: new Date().toISOString()
-                };
-
-                // Show room code
-                document.getElementById('roomCodeDisplay').textContent = roomCode;
-                document.getElementById('createdRoomCode').classList.add('show');
-
-                // Update UI
-                updateRoomUI();
-
-                showNotification(`🎉 Room "${roomName}" berhasil dibuat dengan kode ${roomCode}!`);
-
-                // Hide create button, show copy button
-                const footer = document.querySelector('#createRoomModal .modal-footer');
-                footer.innerHTML = `
-                    <button type="button" class="btn btn-secondary" onclick="closeCreateRoomModal()">
-                        <i class="fas fa-times"></i> Tutup
-                    </button>
-                `;
-            }
-
-            function copyRoomCode() {
-                const roomCode = document.getElementById('roomCodeDisplay').textContent;
-                navigator.clipboard.writeText(roomCode).then(() => {
-                    showNotification('📋 Kode room berhasil disalin ke clipboard!');
-                    // Animate copy button
-                    const copyBtn = document.querySelector('.copy-btn');
-                    copyBtn.innerHTML = '<i class="fas fa-check"></i> Tersalin!';
-                    copyBtn.style.background = '#10b981';
-                    setTimeout(() => {
-                        copyBtn.innerHTML = '<i class="fas fa-copy"></i> Salin Kode';
-                        copyBtn.style.background = '#10b981';
-                    }, 2000);
-                }).catch(err => {
-                    showNotification('❌ Gagal menyalin kode room');
-                });
-            }
-
-            function openJoinRoomModal() {
-                document.getElementById('joinRoomModal').style.display = 'flex';
-                // Reset form
-                document.getElementById('joinRoomCode').value = '';
-                document.getElementById('joinRoomPassword').value = '';
-                document.getElementById('userNickname').value = '';
-                document.getElementById('joinedRoomInfo').classList.remove('show');
-            }
-
-            function closeJoinRoomModal() {
-                document.getElementById('joinRoomModal').style.display = 'none';
-            }
-
-            function joinRoom() {
-                const roomCode = document.getElementById('joinRoomCode').value.trim().toUpperCase();
-                const password = document.getElementById('joinRoomPassword').value;
-                const nickname = document.getElementById('userNickname').value.trim() || 'Pengguna Baru';
-
-                if (!roomCode) {
-                    showNotification('❌ Kode room tidak boleh kosong!');
-                    return;
-                }
-
-                if (!/^[A-Z0-9]{4}-[A-Z0-9]{4}$/.test(roomCode)) {
-                    showNotification('❌ Format kode room tidak valid! (Contoh: ABCD-1234)');
-                    return;
-                }
-
-                // Simulasi join room - dalam aplikasi nyata akan validasi dengan backend
-                // Untuk demo, room dengan format valid akan berhasil
-                const demoRooms = {
-                    'DEMO-1234': { name: 'Room Demo Kolaborasi', users: ['Admin', nickname] },
-                    'TEST-5678': { name: 'Room Test Project', users: ['Manager', 'Developer', nickname] }
-                };
-
-                if (demoRooms[roomCode] || currentRoom?.id === roomCode) {
-                    const roomData = demoRooms[roomCode] || currentRoom;
-
-                    // Update current room state
-                    currentRoom = {
-                        id: roomCode,
-                        name: roomData.name,
-                        password: password,
-                        users: roomData.users,
-                        nickname: nickname
-                    };
-
-                    // Show success info
-                    document.getElementById('joinedRoomName').textContent = roomData.name;
-                    document.getElementById('joinedUserCount').textContent = `${roomData.users.length} pengguna online`;
-                    document.getElementById('joinedRoomInfo').classList.add('show');
-
-                    // Update UI
-                    updateRoomUI();
-
-                    showNotification(`🎉 Berhasil bergabung ke room "${roomData.name}"!`);
-
-                    // Update modal footer
-                    const footer = document.querySelector('#joinRoomModal .modal-footer');
-                    footer.innerHTML = `
-                        <button type="button" class="btn btn-primary" onclick="closeJoinRoomModal()">
-                            <i class="fas fa-check"></i> Selesai
-                        </button>
-                    `;
-
-                } else {
-                    showNotification('❌ Room tidak ditemukan! Periksa kembali kode room yang Anda masukkan.');
-                }
-            }
-
-            function generateRoomCode() {
-                const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
-                let result = '';
-                for (let i = 0; i < 4; i++) {
-                    result += chars.charAt(Math.floor(Math.random() * chars.length));
-                }
-                result += '-';
-                for (let i = 0; i < 4; i++) {
-                    result += chars.charAt(Math.floor(Math.random() * chars.length));
-                }
-                return result;
-            }
-
-            function updateRoomUI() {
-                const roomInfo = document.getElementById('roomInfo');
-                if (currentRoom) {
-                    roomInfo.classList.add('show');
-                    document.getElementById('roomName').textContent = currentRoom.name;
-                    document.getElementById('userCount').textContent = `(${currentRoom.users.length} Users)`;
-                } else {
-                    roomInfo.classList.remove('show');
-                }
-            }
-
-            // Other functions
-            function logout() {
-                if (confirm('Apakah Anda yakin ingin logout?')) {
-                    currentRoom = null;
-                    updateRoomUI();
-                    showNotification('👋 Anda telah logout dari aplikasi');
-                    // Dalam aplikasi nyata, redirect ke halaman login
-                }
-            }
-
-            function searchItems() {
-                const query = document.getElementById('searchInput').value.toLowerCase();
-                const items = document.querySelectorAll('.item-list li');
-                let foundCount = 0;
-
-                items.forEach(item => {
-                    const text = item.textContent.toLowerCase();
-                    if (text.includes(query)) {
-                        item.style.display = 'flex';
-                        foundCount++;
-                    } else {
-                        item.style.display = query ? 'none' : 'flex';
-                    }
-                });
-
-                if (query) {
-                    showNotification(foundCount > 0 ?
-                        `🔍 Ditemukan ${foundCount} hasil untuk "${query}"` :
-                        `❌ Tidak ada hasil untuk "${query}"`
-                    );
-                }
-            }
-
-            function openAddTaskModal() {
-                showNotification('ℹ️ Fitur tambah tugas akan segera hadir!');
-            }
-
-            function updateTime() {
-                const now = new Date();
-                const timeString = now.toLocaleTimeString('id-ID');
-                const timeDisplay = document.getElementById('timeDisplay');
-                if (timeDisplay) {
-                    timeDisplay.textContent = timeString;
-                }
-            }
-
-            function showNotification(message = "Selamat! Aplikasi MyTodo siap digunakan.") {
-                const notification = document.getElementById('notification');
-                notification.querySelector('div').textContent = message;
-                notification.classList.add('show');
-
-                setTimeout(() => {
-                    notification.classList.remove('show');
-                }, 4000);
-            }
-
-            // Auto format room code input
-            document.getElementById('joinRoomCode').addEventListener('input', function (e) {
-                let value = e.target.value.replace(/[^A-Z0-9]/g, '').toUpperCase();
-                if (value.length > 4) {
-                    value = value.slice(0, 4) + '-' + value.slice(4, 8);
-                }
-                e.target.value = value;
-            });
-
-            // Close modals when clicking outside
-            window.onclick = function (event) {
-                const modals = ['createRoomModal', 'joinRoomModal'];
-                modals.forEach(modalId => {
-                    const modal = document.getElementById(modalId);
-                    if (event.target === modal) {
-                        modal.style.display = 'none';
-                    }
-                });
-            }
-
-            // Initialize
-            setInterval(updateTime, 1000);
-            updateTime();
-            updateTaskCounters();
-
-            setTimeout(() => {
-                showNotification('🎉 Selamat datang! MyTodo App siap digunakan.');
-            }, 1000);
-
-            // CSS animations
-            const style = document.createElement('style');
-            style.textContent = `
-                @keyframes fall {
-                    0% {
-                        top: -50px;
-                        transform: rotate(0deg);
-                    }
-                    100% {
-                        top: 100vh;
-                        transform: rotate(360deg);
-                    }
-                }
-                
-                @keyframes slideOut {
-                    to {
-                        opacity: 0;
-                        transform: translateX(-100px);
-                    }
-                }
-            `;
-            document.head.appendChild(style);
-        </script>
-    </body>
-    
-    </html>(this)">
-    <i class="fas fa-check"></i> Selesai
-    </button>
-    </div>
-    </li>
-    <li>
-        <div>Secang Pe</div>
-        <div class="task-actions">
-            <span style="color: #f59e0b;">
-                <i class="fas fa-spinner fa-spin"></i>
-            </span>
-            <button class="complete-btn" onclick="completeTask(this)">
-                <i class="fas fa-check"></i> Selesai
-            </button>
-        </div>
-    </li>
-    <li>
-        <div>Teknik Dasar</div>
-        <div class="task-actions">
-            <span style="color: #f59e0b;">
-                <i class="fas fa-spinner fa-spin"></i>
-            </span>
-            <button class="complete-btn" onclick="completeTask
-
 
         .calendar-header {
             display: flex;
@@ -1726,12 +737,6 @@
                 padding: 8px 4px;
             }
         }
-
-        .task-actions {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
     </style>
 </head>
 
@@ -1786,7 +791,7 @@
                             <span class="nav-left">
                                 <i class="fas fa-list"></i> All Tasks
                             </span>
-                            <span class="count" id="allTasksCount">14</span>
+                            <span class="count">14</span>
                         </li>
                         <li class="nav-item">
                             <span class="nav-left">
@@ -1905,8 +910,14 @@
                                     <div class="day-name">Sen</div>
                                     <div class="day-tasks">2/2</div>
                                     <div class="day-bar">
+                                        <div class="day-progress" style="width: 100%"></div>
+                                    </div>
+                                </div>
+                                <div class="day-item">
+                                    <div class="day-name">Sel</div>
+                                    <div class="day-tasks">2/3</div>
+                                    <div class="day-bar">
                                         <div class="day-progress" style="width: 67%"></div>
-                                        
                                     </div>
                                 </div>
                                 <div class="day-item">
@@ -1952,41 +963,25 @@
                         <h2 class="section-title">
                             <i class="fas fa-rocket"></i> Project Aktif
                         </h2>
-                        <ul class="item-list" id="activeProjectsList">
+                        <ul class="item-list">
                             <li>
-                                <div>Seaf Dating</div>
-                                <div class="task-actions">
-                                    <span><i class="fas fa-check-circle"></i></span>
-                                    <button class="complete-btn completed" disabled>
-                                        <i class="fas fa-check"></i> Selesai
-                                    </button>
-                                </div>
+                                Seaf Dating
+                                <span><i class="fas fa-check-circle"></i></span>
                             </li>
                             <li>
-                                <div>Tujuan Utama</div>
-                                <div class="task-actions">
-                                    <span><i class="fas fa-check-circle"></i></span>
-                                    <button class="complete-btn completed" disabled>
-                                        <i class="fas fa-check"></i> Selesai
-                                    </button>
-                                </div>
+                                Tujuan Utama
+                                <span><i class="fas fa-check-circle"></i></span>
                             </li>
                             <li>
-                                <div>Teknik Merancang</div>
-                                <div class="task-actions">
-                                    <span><i class="fas fa-check-circle"></i></span>
-                                    <button class="complete-btn completed" disabled>
-                                        <i class="fas fa-check"></i> Selesai
-                                    </button>
-                                </div>
+                                Teknik Merancang
+                                <span><i class="fas fa-check-circle"></i></span>
                             </li>
                         </ul>
                         <div class="progress-bar">
                             <div class="progress" style="width: 75%"></div>
                         </div>
                         <div style="display:flex; justify-content:flex-end; margin-top:12px;">
-                            <button class="header-btn" style="background: #ef4444;"
-                                onclick="clearCompleted('activeProjectsList')">
+                            <button class="header-btn" style="background: #ef4444;">
                                 <i class="fas fa-trash"></i> Hapus Selesai
                             </button>
                         </div>
@@ -1996,69 +991,31 @@
                         <h2 class="section-title">
                             <i class="fas fa-cogs"></i> Tugas dalam Progress
                         </h2>
-                        <ul class="item-list" id="progressTasksList">
+                        <ul class="item-list">
                             <li>
-                                <div>Teknik Mengembangkan</div>
-                                <div class="task-actions">
-                                    <span style="color: #f59e0b;">
-                                        <i class="fas fa-spinner fa-spin"></i>
-                                    </span>
-                                    <button class="complete-btn" onclick="completeTask(this)">
-                                        <i class="fas fa-check"></i> Selesai
-                                    </button>
-                                </div>
+                                Teknik Mengembangkan
+                                <span style="color: #f59e0b;">
+                                    <i class="fas fa-spinner fa-spin"></i>
+                                </span>
                             </li>
                             <li>
-                                <div>Secang Pe</div>
-                                <div class="task-actions">
-                                    <span style="color: #f59e0b;">
-                                        <i class="fas fa-spinner fa-spin"></i>
-                                    </span>
-                                    <button class="complete-btn" onclick="completeTask(this)">
-                                        <i class="fas fa-check"></i> Selesai
-                                    </button>
-                                </div>
+                                Secang Pe
+                                <span style="color: #f59e0b;">
+                                    <i class="fas fa-spinner fa-spin"></i>
+                                </span>
                             </li>
                             <li>
-                                <div>Teknik Dasar</div>
-                                <div class="task-actions">
-                                    <span style="color: #f59e0b;">
-                                        <i class="fas fa-spinner fa-spin"></i>
-                                    </span>
-                                    <button class="complete-btn" onclick="completeTask(this)">
-                                        <i class="fas fa-check"></i> Selesai
-                                    </button>
-                                </div>
-                            </li>
-                            <li>
-                                <div>Implementasi Database</div>
-                                <div class="task-actions">
-                                    <span style="color: #f59e0b;">
-                                        <i class="fas fa-spinner fa-spin"></i>
-                                    </span>
-                                    <button class="complete-btn" onclick="completeTask(this)">
-                                        <i class="fas fa-check"></i> Selesai
-                                    </button>
-                                </div>
-                            </li>
-                            <li>
-                                <div>Testing & QA</div>
-                                <div class="task-actions">
-                                    <span style="color: #f59e0b;">
-                                        <i class="fas fa-spinner fa-spin"></i>
-                                    </span>
-                                    <button class="complete-btn" onclick="completeTask(this)">
-                                        <i class="fas fa-check"></i> Selesai
-                                    </button>
-                                </div>
+                                Teknik Dasar
+                                <span style="color: #f59e0b;">
+                                    <i class="fas fa-spinner fa-spin"></i>
+                                </span>
                             </li>
                         </ul>
                         <div class="progress-bar">
-                            <div class="progress" id="progressTasksProgress" style="width: 45%"></div>
+                            <div class="progress" style="width: 45%"></div>
                         </div>
                         <div style="display:flex; justify-content:flex-end; margin-top:12px;">
-                            <button class="header-btn" style="background: #ef4444;"
-                                onclick="clearCompleted('progressTasksList')">
+                            <button class="header-btn" style="background: #ef4444;">
                                 <i class="fas fa-trash"></i> Hapus Selesai
                             </button>
                         </div>
@@ -2095,87 +1052,6 @@
             'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'
         ];
         const dayNames = ['Min', 'Sen', 'Sel', 'Rab', 'Kam', 'Jum', 'Sab'];
-
-        // Task completion functionality
-        function completeTask(button) {
-            const listItem = button.closest('li');
-            const taskName = listItem.querySelector('div').textContent;
-            const statusSpan = listItem.querySelector('.task-actions span');
-
-            // Update visual status
-            listItem.classList.add('completed');
-            statusSpan.innerHTML = '<i class="fas fa-check-circle" style="color: #10b981;"></i>';
-
-            // Update button
-            button.innerHTML = '<i class="fas fa-check"></i> Selesai';
-            button.classList.add('completed');
-            button.disabled = true;
-            button.onclick = null;
-
-            // Update progress bar
-            updateProgressBar();
-
-            // Show notification
-            showNotification(`✅ Tugas "${taskName}" telah diselesaikan!`);
-
-            // Update counters
-            updateTaskCounters();
-
-            // Confetti effect
-            createConfetti();
-        }
-
-        function clearCompleted(listId) {
-            const list = document.getElementById(listId);
-            const completedTasks = list.querySelectorAll('li.completed');
-            let deletedCount = 0;
-
-            completedTasks.forEach(task => {
-                task.style.animation = 'slideOut 0.3s ease';
-                setTimeout(() => {
-                    task.remove();
-                    deletedCount++;
-                    if (deletedCount === completedTasks.length) {
-                        updateProgressBar();
-                        updateTaskCounters();
-                        showNotification(`🗑️ ${deletedCount} tugas yang sudah selesai telah dihapus!`);
-                    }
-                }, 300);
-            });
-        }
-
-        function updateProgressBar() {
-            // Update progress tasks bar
-            const progressList = document.getElementById('progressTasksList');
-            const progressTasks = progressList.querySelectorAll('li');
-            const completedProgressTasks = progressList.querySelectorAll('li.completed');
-
-            if (progressTasks.length > 0) {
-                const progressPercentage = (completedProgressTasks.length / progressTasks.length) * 100;
-                document.getElementById('progressTasksProgress').style.width = progressPercentage + '%';
-            }
-        }
-
-        function updateTaskCounters() {
-            const allTasks = document.querySelectorAll('.item-list li').length;
-            document.getElementById('allTasksCount').textContent = allTasks;
-        }
-
-        function createConfetti() {
-            for (let i = 0; i < 10; i++) {
-                const confetti = document.createElement('div');
-                confetti.style.position = 'fixed';
-                confetti.style.left = Math.random() * 100 + 'vw';
-                confetti.style.top = '-10px';
-                confetti.style.fontSize = '20px';
-                confetti.style.zIndex = '9999';
-                confetti.innerHTML = ['🎉', '✨', '🎊', '⭐'][Math.floor(Math.random() * 4)];
-                confetti.style.animation = 'fall 3s linear forwards';
-                document.body.appendChild(confetti);
-
-                setTimeout(() => confetti.remove(), 3000);
-            }
-        }
 
         // Basic functionality
         function openCreateRoomModal() {
@@ -2214,6 +1090,7 @@
             const weeklyOverview = document.getElementById('weeklyOverview');
             if (weeklyOverview.style.display === 'none') {
                 weeklyOverview.style.display = 'block';
+                // Scroll to the weekly overview
                 weeklyOverview.scrollIntoView({ behavior: 'smooth' });
             } else {
                 weeklyOverview.style.display = 'none';
@@ -2225,8 +1102,11 @@
             const calendarGrid = document.getElementById('calendarGrid');
 
             monthYear.textContent = `${monthNames[currentMonth]} ${currentYear}`;
+
+            // Clear previous calendar
             calendarGrid.innerHTML = '';
 
+            // Add day headers
             dayNames.forEach(day => {
                 const dayHeader = document.createElement('div');
                 dayHeader.className = 'calendar-day header';
@@ -2234,10 +1114,12 @@
                 calendarGrid.appendChild(dayHeader);
             });
 
+            // Get first day of month and days in month
             const firstDay = new Date(currentYear, currentMonth, 1).getDay();
             const daysInMonth = new Date(currentYear, currentMonth + 1, 0).getDate();
             const daysInPrevMonth = new Date(currentYear, currentMonth, 0).getDate();
 
+            // Add previous month's trailing days
             for (let i = firstDay - 1; i >= 0; i--) {
                 const dayElement = document.createElement('div');
                 dayElement.className = 'calendar-day other-month';
@@ -2245,6 +1127,7 @@
                 calendarGrid.appendChild(dayElement);
             }
 
+            // Add current month days
             const today = new Date();
             const isCurrentMonth = today.getFullYear() === currentYear && today.getMonth() === currentMonth;
 
@@ -2258,17 +1141,20 @@
                 }
 
                 dayElement.addEventListener('click', () => {
+                    // Remove previous selection
                     document.querySelectorAll('.calendar-day.selected').forEach(el => {
                         el.classList.remove('selected');
                     });
+                    // Add selection to clicked day
                     dayElement.classList.add('selected');
                 });
 
                 calendarGrid.appendChild(dayElement);
             }
 
+            // Add next month's leading days to fill the grid
             const totalCells = calendarGrid.children.length;
-            const remainingCells = 42 - totalCells;
+            const remainingCells = 42 - totalCells; // 6 rows × 7 days = 42 cells
 
             for (let day = 1; day <= remainingCells && remainingCells > 0; day++) {
                 const dayElement = document.createElement('div');
@@ -2296,6 +1182,7 @@
             generateCalendar();
         }
 
+        // Update time
         function updateTime() {
             const now = new Date();
             const timeString = now.toLocaleTimeString('id-ID');
@@ -2305,169 +1192,26 @@
             }
         }
 
-        function showNotification(message = "Selamat! Aplikasi MyTodo siap digunakan.") {
-            const notification = document.getElementById('notification');
-            notification.querySelector('div').textContent = message;
-            notification.classList.add('show');
-
-            setTimeout(() => {
-                notification.classList.remove('show');
-            }, 3000);
-        }
-
-        // CSS animations
-        const style = document.createElement('style');
-        style.textContent = `
-            @keyframes fall {
-                0% {
-                    top: -50px;
-                    transform: rotate(0deg);
-                }
-                100% {
-                    top: 100vh;
-                    transform: rotate(360deg);
-                }
-            }
-            
-            @keyframes slideOut {
-                to {
-                    opacity: 0;
-                    transform: translateX(-100px);
-                }
-            }
-        `;
-        document.head.appendChild(style);
-
-        // Initialize
+        // Update time every second
         setInterval(updateTime, 1000);
         updateTime();
+
+        // Show notification on load
+        setTimeout(() => {
+            const notification = document.getElementById('notification');
+            if (notification) {
+                notification.classList.add('show');
+                setTimeout(() => {
+                    notification.classList.remove('show');
+                }, 3000);
+            }
+        }, 1000);
+
+        // Initialize calendar when page loads
+        document.addEventListener('DOMContentLoaded', function () {
             generateCalendar();
-
-            setTimeout(() => {
-                showNotification();
-            }, 1000);
-
-            // Initialize task counters
-            updateTaskCounters();
-        </script> <!-- Tutup script di sini -->
-    
-    <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
-            <i class="fas fa-times"></i> Batal
-        </button>
-        <button type="button" class="btn btn-primary" onclick="createTask()">
-            <i class="fas fa-plus"></i> Buat Tugas
-        </button>
-    </div>
-    </div>
-    </div>
-    </div>
-    
-    <!-- Bootstrap JS -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
-    
-    <script>
-        // Update clock
-        function updateClock() {
-            const now = new Date();
-            const timeString = now.toLocaleTimeString('id-ID');
-            document.getElementById('current-time').textContent = timeString;
-        }
-
-        // Update clock every second
-        setInterval(updateClock, 1000);
-        updateClock(); // Initial call
-
-        // Create task function
-        function createTask() {
-            const form = document.getElementById('taskForm');
-            const formData = new FormData(form);
-
-            // Get form values
-            const kategori = document.getElementById('kategori').value;
-            const prioritas = document.getElementById('prioritas').value;
-            const tanggal = document.getElementById('tanggal').value;
-            const penanggungJawab = document.getElementById('penanggung-jawab').value;
-            const tags = document.getElementById('tags').value;
-            const deskripsi = document.getElementById('deskripsi').value;
-            const checklist = document.getElementById('checklist').value;
-
-            // Basic validation
-            if (!kategori || !prioritas || !tanggal || !penanggungJawab) {
-                alert('Mohon isi semua field yang wajib diisi!');
-                return;
-            }
-
-            console.log('Task Data:', {
-                kategori,
-                prioritas,
-                tanggal,
-                penanggungJawab,
-                tags,
-                deskripsi,
-                checklist
-            });
-
-            alert('Tugas berhasil dibuat!');
-
-            const modal = bootstrap.Modal.getInstance(document.getElementById('taskModal'));
-            modal.hide();
-            form.reset();
-
-            updateSummary();
-        }
-
-        function updateSummary() {
-            const totalElement = document.querySelector('.summary-card.total .summary-number');
-            const currentTotal = parseInt(totalElement.textContent);
-            totalElement.textContent = currentTotal + 1;
-        }
-
-        const fab = document.querySelector('.fab');
-
-        setInterval(() => {
-            fab.style.animation = 'pulse 0.6s';
-            setTimeout(() => {
-                fab.style.animation = '';
-            }, 600);
-        }, 3000);
-
-        const style = document.createElement('style');
-        style.textContent = `
-            @keyframes pulse {
-                0% { transform: scale(1); }
-                50% { transform: scale(1.05); }
-                100% { transform: scale(1); }
-            }
-            `;
-        document.head.appendChild(style);
-
-        document.getElementById('tags').addEventListener('input', function (e) {
-            const tags = e.target.value.split(',').map(tag => tag.trim()).filter(tag => tag);
-        });
-
-        const textareas = document.querySelectorAll('textarea');
-        textareas.forEach(textarea => {
-            textarea.addEventListener('input', function () {
-                this.style.height = 'auto';
-                this.style.height = (this.scrollHeight) + 'px';
-            });
         });
     </script>
-
-
-
-
-    </script>
-    
 </body>
 
 </html>
-<div class="day-progress" style="width: 100%"></div>
-</div>
-</div>
-<div class="day-item">
-    <div cl
-    ass="day-name">Sel</div>
-    <div class="day-tasks">2/3</div>
-    <div class="day-bar">
